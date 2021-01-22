@@ -17,3 +17,5 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     hostname: localhost
+logging:
+  file: C:\microservice\Spring-Boot-Spring-Cloud\logs\microservice.log
