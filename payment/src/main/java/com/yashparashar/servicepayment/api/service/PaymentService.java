@@ -20,6 +20,11 @@ public class PaymentService {
     }
 
     public String paymentprocessing(){
+        //api of 3rd party payment gateway
         return new Random().nextBoolean()?"success":"false";
+    }
+
+    public Payment findPaymentHistoryByOrderId(int orderId) {
+        return repository.findByOrderId(orderId);
     }
 }

@@ -18,14 +18,13 @@ public class OrderService {
     private RestTemplate template;
 
     public TransactionResponse saveOrder(TransactionRequest request){
-        String response;
+        String response="";
         Order order = request.getOrder();
         Payment payment = request.getPayment();
         payment.setOrderId(order.getId());
         payment.setAmount(order.getPrice());
         //rest call
-      Payment paymentResponse =  template.postForObject("http://localhost:9091/payment/savePayment",payment,Payment.class);
-        assert paymentResponse != null;
+      Payment paymentResponse =  template.postForObject("http://PAYMENT-SERVICE/payment/savePayment",payment,Payment.class);
         response = paymentResponse.getPaymentStatus().equals("success")?"payment success":"failed";
       repository.save(order);
         return new TransactionResponse(order,paymentResponse.getAmount(),paymentResponse.getTransactionId(),response);
